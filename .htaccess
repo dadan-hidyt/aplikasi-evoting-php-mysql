@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^kotak_suara/?$ kotak_suara.php [QSA]
+RewriteRule ^kotak_suara/detail/calon-([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+).html$ detail_calon.php?calon=$1 [QSA]
+RewriteRule ^keluar$ keluar.php [QSA]
