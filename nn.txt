@@ -1,0 +1,15 @@
+====
+ADMIN
+Username:
+ifsuinformatikasumedangadminweb
+Password:
+indonesiapisan
+====
+
+====
+PANITIA
+Username:
+panitiapemilihanosisifsu
+Password:
+indonesiamerdeka
+====

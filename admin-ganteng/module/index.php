@@ -83,16 +83,22 @@
   </div>
 </div>
 <!-- report -->
-<div class="row">
+<?php
+if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin')
+{
+  ?>
+  <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card position-relative">
       <div class="card-body">
-        <p class="card-title">Suara sementara</p>
+        <p class="card-title">Hasil Pemilihan</p>
         <div class="row">
           <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-center">
             <div class="ml-xl-4">
               <h4><?php echo $total_keseluruhan_suara ?> Suara</h4>
-              <p class="text-muted mb-2 mb-xl-0">Ini adalah hasil sementera hasil sebenarnya akan di rekap setelah pemilihan berkahhir!</p>
+              <p class="text-muted mb-2 mb-xl-0">
+                Suara yang tertera di sini adalah hasil Perhitungan, pasti data ini akurat karena di hitung oleh sistem
+              </p>
             </div>  
           </div>
           <div class="col-md-12 col-xl-9">
@@ -236,3 +242,6 @@ var northAmericaChart = new Chart(northAmericaChartCanvas, {
 document.getElementById('north-america-legend').innerHTML = northAmericaChart.generateLegend();
 }
 </script>
+  <?php
+}
+?>

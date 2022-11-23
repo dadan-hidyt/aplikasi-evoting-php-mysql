@@ -1,10 +1,10 @@
 <?php 
 //jika sudah memilih user tidak bisa mengakses halaman login
-if(isset($_COOKIE['upin']) && $_COOKIE['upin']==1){
-	include 'sudah_memilih.php';
-	exit;
-	die;
-}
+// if(isset($_COOKIE['upin']) && $_COOKIE['upin']==1){
+// 	include 'sudah_memilih.php';
+// 	exit;
+// 	die;
+// }
 //including configuration and connection database
 include 'sys.conf.php';
 //including functions file
@@ -20,61 +20,51 @@ if(logedin()){
 if(isset($_POST['submit'])){
 	if(isset($_POST['csrf']) && !verify_csrf($_POST['csrf'])){
 		echo "token csrf is missing";
-		die();
+		exit(1);
 	}
 	$token = secure($_POST['token']);
 	if(preg_match("/[^a-zA-Z0-9]/",$token) || $token == ''){
 		$error = "Token harus mengadung a-z dan 0-9, tidak mengandung karakter dan spasi. silahan coba lagi!";
 	}else{
-		if($data = cek_token_login($token)){
+		try {
+			$data = cek_token_login($token);
 			generate_session_login($data['id']);
 			redirect('kotak_suara.php');
 			exit;
-		}else{
-			$error = "Token tidak valid silahkan coba lagi";
+		}catch(Exception $e){
+			$error = $e->getMessage();
 		}
 	}
-	
 }
 $title = "Masuk | ".$title;
 include 'content/partial.header.php';
 ?>
+<link rel="stylesheet" type="text/css" href="assets/css/login-style.css">
 <!-- start:main -->
-<img src="<?= base_url() ?>assets/img/elipse-icon.svg" alt="Atribut" class="elipse-icon">
-
-<div class="container login">
-	<form action="" method="post" class="form-login">
-		<div class="form-header">
-			<h3>Login</h3>
+<div class="wrapper">
+	<div class="container">
+		<div class="main">
+			<img src="assets/img/logo_580.png" alt="logo icso">
+			<h2>PEMILIHAN OSIS SMK IFSU</h2>
 			<?php if(empty($error)):?>
-				<span>Silahkan Login terlebih dahulu</span>
-				<?php else: ?>
-					<span><?= $error ?></span>
-				<?php endif; ?>
+				<span >Silahkan Login terlebih dahulu</span>
+			<?php else: ?>
+				<span style="color:red;"><?= $error ?></span>
+			<?php endif; ?>
+			<form action="" method="POST">
+				<input hidden name="csrf" value="<?=  generate_csrf(); ?>">
+				<ul class="form">
+					<li><input class="username" required name="token" type="text" id="input-token" placeholder="Masukan Token.."></li>
+					<li><button type="submit" name="submit" class="button" >Login</button></li>
+				</ul>
+			</form>
+			<br>
+			&copy; Icso
+			<!-- <a href="#" class="login-problem">Butuh bantuan?</a> -->
 		</div>
-
-		<div class="inputbox">
-			<input hidden name="csrf" value="<?=  generate_csrf(); ?>">
-			<div class="token-input">
-				<input required name="token" type="text" id="input-token" placeholder="Masukan Token..">
-			</div>
-			<button type="submit" name="submit" class="input-submit" >Login</button>
-			<!-- <input type="submit" class="input-submit" > -->
-		</div>
-	</form>
-
-	<div class="copy">
-		<img src="assets/img/copy-icon.svg" alt="copyright">
-		<span>copyright 2022 ICSO</span>
 	</div>
-
 </div>
-
-
-
-
-
-<!-- end:man -->
+<!-- end:main -->
 <?php 
 include 'content/partial.footer.php';
 ?>

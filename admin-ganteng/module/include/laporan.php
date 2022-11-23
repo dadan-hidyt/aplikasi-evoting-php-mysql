@@ -13,7 +13,14 @@
  <div class="card">
    <div class="card-body">
      <h4 class="card-title">MENU LAPORAN</h4>
-        <a href="print.php?data_print_type=hasil_pemilihan" class="btn col-md-2 btn-primary">Hasil Pemilihan</a>&nbsp;    
+     <?php
+     if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin')
+     {
+      ?>
+    <a href="print.php?data_print_type=hasil_pemilihan" class="btn col-md-2 btn-primary">Hasil Pemilihan</a>&nbsp;    
+      <?php
+     }     
+     ?>
         <a href="print.php?data_print_type=data_peserta" class="btn col-md-2 btn-primary">Data peserta</a>&nbsp;    
      </div>
    </div>

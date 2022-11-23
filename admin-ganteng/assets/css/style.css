@@ -20625,8 +20625,9 @@ dl li {
 
 /* Sidebar */
 .sidebar {
-  min-height: calc(100vh - 70px);
-  background: #dddce1;
+
+box-shadow: 0px 0px 8px #a5a5a5;
+  background: white;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   padding: 0;

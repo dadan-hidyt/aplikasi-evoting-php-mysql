@@ -1,4 +1,6 @@
 <?php 
+if (isset($_SESSION['level']) && $_SESSION['level'] == 'admin')
+{
 /**
  * author dadan hdayat
  */
@@ -77,6 +79,10 @@ if(isset($_GET['action']) && !empty($_GET['action'])){
 }else{
   include 'include/show_data_calon.php';
 }
-
+}else{
+  ?>
+  <h3>Akses hanya untuk admin</h3>
+  <?php
+}
 ?>
 

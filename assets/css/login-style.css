@@ -1,0 +1,107 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Regular.ttf');
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+}
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:100vh;
+    background-image: url('../img/IMG_6719.JPG');
+}
+.wrapper{
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    color:rgb(65, 65, 65);
+    border-radius: 10px;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    background-color:#fafafaa8;
+    backdrop-filter: blur(5px);
+}
+
+.main{
+    box-sizing: border-box;
+    width:93%;
+    margin:auto;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main img{
+    width: 80px;
+    height: 80px;
+    margin-top: 30px;
+}
+.main h2{
+    margin-top: 20px;
+}
+.main p{
+    font-size: 13px;
+    text-align: center;
+    margin-top: 25px;
+}
+.username, .password{
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
+    border-radius: 6px;
+    caret-color: #51A3D1;
+    border: 1px solid #636262;
+    margin-top: 25px;
+    padding-left: 20px;
+    outline: none;
+}
+.username:focus,
+.password:focus{
+    box-shadow: 0px 0px 0px 2px #0059ff23;
+}
+.form li{
+    list-style: none;
+}
+.password{
+    margin-top: 15px;
+}
+/* .password::-webkit-input-placeholder, .username::-webkit-input-placeholder, .password::-webkit-input {
+    padding-left: 20px;
+} */
+.button{
+    width: 300px;
+    cursor:pointer;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #0b07ff;
+    display: flex;
+    border:none;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.login-problem{
+    color: #51A3D1;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 30px;
+}
+@media (min-width:1024px) {
+    .container{
+        width:25%;
+    }
+    .main{
+        width:100%!important;
+    }
+}

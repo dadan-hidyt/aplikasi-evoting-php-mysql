@@ -90,8 +90,6 @@ function generate_session_login($id = "")
 function logout(){
 	unset($_SESSION['login']);
 	unset($_SESSION['id_login']);
-	session_destroy();
-	session_unset();
 }
 function sudah_memilih($id)
 {
@@ -117,12 +115,12 @@ function sudah_memilih($id)
 function cek_token_login($token)
 {
 	global $konek;
-	$ct = $konek->query("SELECT * FROM tbl_peserta_pemilihan WHERE token='$token'");
+	$ct = $konek->query("SELECT * FROM tbl_peserta_pemilihan WHERE token='$token' AND sudah_memilih='0'");
 	if($ct){
 		if($ct->num_rows == 1){
 			return $ct->fetch_assoc();
 		}else{
-			return false;
+			throw new Exception("Token tidak valid atau sudah expired!", 1);	
 		}
 	}
 }
@@ -166,4 +164,21 @@ function get_calon()
 	return $data;
 }
 
+function tambah_data_pemilih($nama)
+{
+	global $konek;
+	$nama_pemilih = secure($nama);
+	if(empty($nama_pemilih)){
+		return false;
+	}
+	$ab = $konek->query("SELECT token, max(id) as id_terakhir FROM tbl_peserta_pemilihan");
+	$id_terakhir = $ab->fetch_object()->id_terakhir;
+	$id_terakhir++;
+	$token = generate_token_pemilihan($nama_pemilih,$id_terakhir);
+	if($konek->query("INSERT INTO tbl_peserta_pemilihan (nama,token) VALUES('$nama_pemilih','$token')")){
+		return true;
+	}else{
+		return false;
+	}
+}
 ?>

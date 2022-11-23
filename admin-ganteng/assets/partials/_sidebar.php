@@ -33,9 +33,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?mod=index">
+            <a class="nav-link" href="?mod=setting">
               <i class="ti-server menu-icon"></i>
-              <span class="menu-title">System</span>
+              <span class="menu-title">Pengaturan</span>
             </a>
           </li>
           <li class="nav-item">

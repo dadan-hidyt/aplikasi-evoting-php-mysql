@@ -46,9 +46,8 @@ while($dd = $datas->fetch_assoc()){
       <div class="card-body">
         <h4 class="card-title">Data peserta pemilihan</h4>
         <div class="card-description">
-          <a href="" class="btn btn-sm btn-primary">Cetak</a>
           <button type="button"  data-toggle="modal" data-target="#AddDataPemilih" class="btn btn-primary btn-sm">Tambah</button>
-          <a href="" class="btn btn-sm btn-primary">Reset</a>
+          <a href="import_from_excel.php" class="btn btn-warning btn-sm text-white">export excel</a>
         </div>
         <div class="table-responsive pt-3">
           <table id="tabel-peserta" class="table table-bordered">
@@ -86,7 +85,7 @@ while($dd = $datas->fetch_assoc()){
                     </td>
 
                     <td>
-                      <span style="background:#dedede;color:#dedede;border-radius:4px;"><?= $key['token'] ?></span>
+                      <span style="background:white;color:black;border-radius:4px;"><?= $key['token'] ?></span>
                     </td>
                     <td>
                       <?= !empty($key['waktu_submit']) ? date("d-m-Y, H:i:s",$key['waktu_submit']) : "--/--/---,--:--:--" ?>

@@ -8,18 +8,10 @@ if(isset($_GET['action']) && !empty($_GET['action'])){
         require 'include/show_data_peserta_pemilihan.php';
     }elseif($action == 'add_data_pemilih'){
         if(isset($_POST['tambah'])){
-            $nama_pemilih = secure($_POST['nama_pemilih']);
-            if(empty($nama_pemilih)){
-                echo "<script>alert('Data gagal di tambahkan');location.href='?mod=data_peserta';</script>";
-                exit;
-            }
-            $ab = $konek->query("SELECT token, max(id) as id_terakhir FROM tbl_peserta_pemilihan");
-            $id_terakhir = $ab->fetch_object()->id_terakhir;
-            $id_terakhir++;
-            $token = generate_token_pemilihan($nama_pemilih,$id_terakhir);
-            if($konek->query("INSERT INTO tbl_peserta_pemilihan (nama,token) VALUES('$nama_pemilih','$token')")){
+           if(tambah_data_pemilih($_POST['nama_pemilih']))
+            {
                 echo "<script>alert('Data Berhasil di tambahkan');location.href='?mod=data_peserta';</script>";
-            }else{
+            } else {
                 echo "<script>alert('Data gagal di tambahkan');location.href='?mod=data_peserta';</script>";
             }
         }

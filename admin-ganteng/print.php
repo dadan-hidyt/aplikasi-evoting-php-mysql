@@ -14,10 +14,11 @@ if(isset($_GET['data_print_type']) && !empty($_GET['data_print_type'])){
         $PDF = new FPDF();
         $PDF->AddPage("P","A4");
         $PDF->SetFont('Helvetica','B',14);
-        $PDF->Text(15,16,"DATA PESERTA PEMILIHAN");
-        $totl = $konek->query("SELECT * FROM tbl_peserta_pemilihan")->num_rows;
+        $PDF->Text(25,16,"PESERTA PEMILIHAN OSIS SMK INFORMATIKA SUMEDANG");
+        $total = $konek->query("SELECT * FROM tbl_peserta_pemilihan")->num_rows;
         $PDF->SetFont('Helvetica','B',6);
-        $PDF->Text(15,20,"Total: $totl");
+        $PDF->Text(25,20,"Total: $total");
+        $PDF->Text(25,23,"Sudah Memilih: ".$konek->query("SELECT * FROM tbl_peserta_pemilihan WHERE sudah_memilih='1'")->num_rows);
         $PDF->SetFont('Helvetica',"",8);
         $PDF->Ln(23);
         $PDF->SetFont('Helvetica',"",9);
@@ -28,6 +29,7 @@ if(isset($_GET['data_print_type']) && !empty($_GET['data_print_type'])){
         $PDF->Cell(50,8,"Token",1,0,"C");
         $PDF->Cell(50,8,"Status Memilih",1,0,"C");
         $PDF->Ln();
+        //data siswa
         $datas = $konek->query(
             "SELECT 
             tbl_peserta_pemilihan.*,tbl_peserta_pemilihan.id as u_id,
@@ -35,7 +37,7 @@ if(isset($_GET['data_print_type']) && !empty($_GET['data_print_type'])){
             tbl_calon.*,tbl_calon.id as id_tbl_calon
             FROM tbl_peserta_pemilihan
             LEFT JOIN tbl_kotak_suara ON tbl_kotak_suara.user_id = tbl_peserta_pemilihan.id
-            LEFT JOIN tbl_calon ON tbl_calon.no_calon=tbl_kotak_suara.pilihan");
+            LEFT JOIN tbl_calon ON tbl_calon.no_calon=tbl_kotak_suara.pilihan ORDER BY tbl_peserta_pemilihan.nama ASC");
         $id = 0;
 
         while($dd = $datas->fetch_assoc()){
@@ -77,7 +79,8 @@ if(isset($_GET['data_print_type']) && !empty($_GET['data_print_type'])){
      if (!empty(get_calon())) {
          foreach(get_calon() as $cal){
              $pdf->Cell(30, 5, $cal['nama_calon']);
-             $pdf->Cell(15, 5, $cal['total_suara'], 0, 0, 'R');
+             $pdf->Cell(29, 5, ":");
+             $pdf->Cell(-10, 5, $cal['total_suara']."\tSuara", 0, 0, 'R');
              $pdf->Ln();
          }
      }
@@ -104,8 +107,6 @@ if(isset($_GET['data_print_type']) && !empty($_GET['data_print_type'])){
     $pdf->PieChart(100, 35, $data, '%l (%p)', $array);
 
 }
-
-
 $pdf->SetXY($valX, $valY + 40);
 $pdf->Output();
 }    

@@ -4,7 +4,7 @@ include 'functions.php';
 sessionStart();
 if(!logedin()){
     redirect(base_url().'index.php');
-    exit;
+    exit(1);
 }
 $userlogin = user_data_login();
 if(isset($_POST['pilih'])){

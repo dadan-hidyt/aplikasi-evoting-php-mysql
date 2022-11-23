@@ -33,47 +33,51 @@ $foto = base_url().$calon_data['foto_calon'];
 $title = "calon-".$calon_data['no_calon']."-".$calon_data['nama_calon']."| ".$title;
 include 'content/partial.header.php';
 ?>
+<link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/detail-calon.css">
 <!-- start:main -->
-<nav class="navbar">
-	<a href="<?= base_url() ?>kotak_suara" class="back-icon">
-		<img src="<?= base_url(); ?>assets/img/back-icon.svg" alt="back">
-		<p>Kembali</p>
-	</a>
-</nav>
-
-<div class="container">
-	<h3>Detail Calon</h3>
-
-
-	<div class="card-calon detail-calon">
-		<div class="box-img">
-			<img src="<?= $foto ?>" alt="" srcset="">
+<div class="wrapper">
+	<div class="container">
+		<div class="head">
+			<h2>Detail Calon</h2>
+			<a href="file:///D:/MY%20PROJECT/PEMILU%20APPS/PILIHAN/index.html" class="bx-button">
+				<i class='bx bx-arrow-back bx-md'></i>
+			</a>
 		</div>
-		<div class="username">
-			<p><?= $calon_data['nama_calon'] ?></p>
+
+
+		<div class="main-info">
+			<div class="info-profile">
+				<div class="calon_satu">
+					<img src="<?= $foto ?>" alt="foto-calon">
+				</div>
+				<form action="<?= base_url() ?>pilih.php" method="post">
+					<input hidden name="no_calon" value='<?= $calon_data['no_calon'] ?>'>
+					<input hidden name="csrf" value='<?= generate_csrf() ?>'>
+					<button onclick='return konfirmasi()' name='pilih' class='pick-button' type="submit">Pilih</button>
+				</form>
+			</div>
+			<div class="visi-misi">
+				<h1><?= sprintf('%02s',$calon_data['no_calon']) ?></h1>
+				<h3><?= $calon_data['nama_calon'] ?></h3>
+				<?php echo htmlspecialchars_decode($calon_data['description']) ?>
+				<form action="<?= base_url() ?>pilih.php" method="post">
+					<input hidden name="no_calon" value='<?= $calon_data['no_calon'] ?>'>
+					<input hidden name="csrf" value='<?= generate_csrf() ?>'>
+					<button onclick='return konfirmasi()' name='pilih' class='pick-button-mobile' type="submit">Pilih</button>
+				</form>
+			</div>
+
 		</div>
+
+
+
 	</div>
-
-
-	<div class="box-visi-misi">
-		<?php echo htmlspecialchars_decode($calon_data['description']) ?>
-	</div>
-
-	<form action="<?= base_url() ?>pilih.php" method="post">
-		<input hidden name="no_calon" value='<?= $calon_data['no_calon'] ?>'>
-		<input hidden name="csrf" value='<?= generate_csrf() ?>'>
-		<button onclick='return konfirmasi()' name='pilih' class='btn-pilih' type="submit">Pilih</button>
-	</form>
 </div>
-
-
 <script>
 	function konfirmasi(){
 		return confirm('Apakah kamu yakin dengan pilihan ini?');
 	}
 </script>
-
-
 <!-- end:man -->
 <?php 
 include 'content/partial.footer.php';
