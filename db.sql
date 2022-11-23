@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Nov 2022 pada 13.25
+-- Waktu pembuatan: 23 Nov 2022 pada 12.50
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 7.4.30
 
@@ -30,15 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
   `email` varchar(223) NOT NULL,
-  `password` varchar(223) NOT NULL
+  `password` varchar(223) NOT NULL,
+  `level` enum('admin','panitia') NOT NULL DEFAULT 'panitia'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `admins`
 --
 
-INSERT INTO `admins` (`id`, `email`, `password`) VALUES
-(1, 'admin', 'admin');
+INSERT INTO `admins` (`id`, `email`, `password`, `level`) VALUES
+(1, 'ifsuinformatikasumedangadminweb', 'indonesiapisan', 'admin'),
+(3, 'panitiapemilihanosisifsu', 'indonesiamerdeka', 'panitia');
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,10 @@ INSERT INTO `tbl_kotak_suara` (`id`, `user_id`, `pilihan`) VALUES
 (56, '6', '3'),
 (57, '36', '3'),
 (58, '11', '3'),
-(59, '7', '1');
+(59, '7', '1'),
+(60, '9', '3'),
+(61, '46', '3'),
+(62, '17', '1');
 
 -- --------------------------------------------------------
 
@@ -128,7 +133,7 @@ INSERT INTO `tbl_peserta_pemilihan` (`id`, `nama`, `token`, `waktu_submit`, `sud
 (6, 'Yayan Ruhian(GURU)', 'nnvMOn6', '1668513731', 1),
 (7, 'Rafly Firmansyah(XII-RPL-1)', 'uiSIna7', '1668595072', 1),
 (8, 'Metha Ilyasa(xii-rpl-12)', 'Got8HP8', '1668512431', 1),
-(9, 'erwan(XII-RPL-10)', 'WYEdnc9', '', 0),
+(9, 'erwan(XII-RPL-10)', 'WYEdnc9', '1669122749', 1),
 (10, 'Asep Tatang Suryana(Wakasek)', 'kunyhy10', '1668512370', 1),
 (11, 'Dadan Hidayat', 'apsJyn11', '1668595017', 1),
 (12, 'Gwen Rosi Vanigara', 'cMCkmr12', '', 0),
@@ -136,7 +141,7 @@ INSERT INTO `tbl_peserta_pemilihan` (`id`, `nama`, `token`, `waktu_submit`, `sud
 (14, 'Asep Jebred', 'TsSxcT14', '', 0),
 (15, 'Ujang Magrib', 'sSirPy15', '', 0),
 (16, 'Agung Hapsah', 'tfPSBo16', '', 0),
-(17, 'Dadan Hidayat', 'SaSDmK17', '', 0),
+(17, 'Dadan Hidayat', 'SaSDmK17', '1669200898', 1),
 (18, 'Gwen Rosi Vanigara', 'yJKeZz18', '', 0),
 (19, 'Elon Musk', 'uwrour19', '', 0),
 (20, 'Asep Jebred', 'HJsRpe20', '', 0),
@@ -163,7 +168,10 @@ INSERT INTO `tbl_peserta_pemilihan` (`id`, `nama`, `token`, `waktu_submit`, `sud
 (41, 'H. Rafly(WAKASEK)', 'ORcpEf41', '', 0),
 (42, 'Deri Darajat(Kepala Sekolah)', 'CRuDpB42', '', 0),
 (43, 'Dadang Yahya(GURU)', 'Jsarso43', '', 0),
-(44, 'Upin(GURU)', 'mucRqd44', '', 0);
+(44, 'Upin(GURU)', 'mucRqd44', '', 0),
+(45, 'Asep Gundala(XII-RPL-9)', 'PeRl5I45', '', 0),
+(46, 'Ragil(XII-MM-2)', 'uBRONp46', '1669122907', 1),
+(47, 'Irfan(XII-RPL-9)', 'QzIWPn47', '', 0);
 
 --
 -- Indexes for dumped tables
@@ -202,7 +210,7 @@ ALTER TABLE `tbl_peserta_pemilihan`
 -- AUTO_INCREMENT untuk tabel `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_calon`
@@ -214,13 +222,13 @@ ALTER TABLE `tbl_calon`
 -- AUTO_INCREMENT untuk tabel `tbl_kotak_suara`
 --
 ALTER TABLE `tbl_kotak_suara`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_peserta_pemilihan`
 --
 ALTER TABLE `tbl_peserta_pemilihan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
